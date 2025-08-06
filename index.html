@@ -1,129 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NFT Presentation</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFT Presentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        
+        :root {
+            --primary-color: #4A4A4A;
+            --secondary-color: #007BFF;
+            --accent-color: #28A745;
+            --bg-color: #F8F9FA;
+            --text-color: #333;
+            --light-text-color: #6c757d;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .presentation-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .slide {
+            padding: 40px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .slide:last-child {
+            border-bottom: none;
+        }
+
+        .title-slide {
+            text-align: center;
+            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+            border-radius: 12px 12px 0 0;
+            padding: 80px 40px;
+        }
+
+        .title-slide h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .title-slide p {
+            font-size: 1.5rem;
+            color: var(--light-text-color);
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        li strong {
+            color: var(--secondary-color);
+        }
+
+        .examples {
+            margin-top: 20px;
+            font-style: italic;
+            color: var(--light-text-color);
+        }
+
+        .conclusion {
+            margin-top: 30px;
+            padding: 20px;
+            background: #eaf6ea;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .how-to-earn-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .how-to-earn-list li {
+            border-left-color: var(--secondary-color);
+        }
+
+        .how-to-earn-list li strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .risks li {
+            border-left-color: #dc3545;
+        }
+
+        .risks li strong {
+            color: #dc3545;
+        }
+
+        .tip {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            border-radius: 8px;
+            color: #856404;
+        }
+
+        .final-thoughts {
+            text-align: center;
+            background: linear-gradient(135deg, #e6f3ff, #f0f8ff);
+            padding: 60px 40px;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .final-thoughts h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+        }
+
+        .final-thoughts ul {
+            text-align: left;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .final-thoughts li {
+            border-left-color: var(--secondary-color);
+        }
+
+        .closing-line {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 40px;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
-  <div class="max-w-4xl mx-auto px-4 py-12 space-y-10">
-    
-    <!-- Slide 1 -->
-    <section>
-      <h1 class="text-4xl font-bold text-green-400 mb-2">NFTs: The Future of Digital Ownership and Income</h1>
-      <p class="text-lg text-gray-300">Unlocking the Value of Digital Assets Through Blockchain Technology</p>
-    </section>
+<body>
 
-    <!-- Slide 2 -->
-    <section>
-      <h2 class="text-3xl font-bold text-green-300 mb-4">What is an NFT? (Non-Fungible Token)</h2>
-      <ul class="list-disc list-inside space-y-2 text-gray-200">
-        <li>NFT stands for <strong>Non-Fungible Token</strong>.</li>
-        <li>It’s a <strong>unique digital asset</strong> stored on a blockchain.</li>
-        <li>Unlike cryptocurrencies, NFTs are <strong>not interchangeable</strong>.</li>
-        <li>Each NFT has its own <strong>metadata, ownership record, and authenticity</strong>.</li>
-      </ul>
-      <p class="mt-4">🎨 Digital Art | 🎮 Game Items | 🎵 Music | 📸 Collectibles</p>
-    </section>
+    <div class="presentation-container">
 
-    <!-- Slide 3 -->
-    <section>
-      <h2 class="text-3xl font-bold text-green-300 mb-4">NFTs and Their Relationship to Digital Assets</h2>
-      <ul class="list-disc list-inside space-y-2 text-gray-200">
-        <li>Digital assets include images, videos, music, software, etc.</li>
-        <li>NFTs bring <strong>ownership and scarcity</strong> to these assets.</li>
-        <li>Think of NFTs as <strong>certificates of authenticity</strong>.</li>
-        <li>Without NFTs, files can be copied. With NFTs, ownership is <strong>provable and secure</strong>.</li>
-      </ul>
-      <p class="mt-4 font-semibold">Conclusion: NFTs bring value, uniqueness, and traceability to digital assets.</p>
-    </section>
+        <div class="slide title-slide">
+            <h1>NFTs: The Future of Digital Ownership and Income</h1>
+            <p>Unlocking the Value of Digital Assets Through Blockchain Technology</p>
+        </div>
 
-    <!-- Slide 4 -->
-    <section>
-      <h2 class="text-3xl font-bold text-green-300 mb-4">The Purpose of an NFT Marketplace</h2>
-      <ul class="list-disc list-inside space-y-2 text-gray-200">
-        <li>A place where creators, buyers, and sellers meet.</li>
-        <li>Examples: OpenSea, Blur, Magic Eden, Coreverse Marketplace, PiNFT</li>
-        <li>Functions:
-          <ul class="ml-5 list-disc">
-            <li>Mint (create) NFTs</li>
-            <li>List & sell NFTs</li>
-            <li>Buy & trade NFTs</li>
-            <li>View ownership, royalties, and stats</li>
-          </ul>
-        </li>
-      </ul>
-      <p class="mt-4 font-semibold">Purpose: Create a liquid, accessible, and valuable digital asset economy.</p>
-    </section>
+        <div class="slide">
+            <h2>What is an NFT? (Non-Fungible Token)</h2>
+            <ul>
+                <li><strong>NFT</strong> stands for Non-Fungible Token.</li>
+                <li>It’s a unique digital asset stored on a blockchain.</li>
+                <li>Unlike cryptocurrencies (like Bitcoin or Ethereum), NFTs are not interchangeable.</li>
+                <li>Each NFT has its own metadata, ownership record, and digital proof of authenticity.</li>
+            </ul>
+            <div class="examples">
+                <p><strong>Examples:</strong> 🎨 Digital Art | 🎮 Game Items | 🎵 Music | 📸 Collectibles</p>
+            </div>
+        </div>
 
-    <!-- Slide 5 -->
-    <section>
-      <h2 class="text-3xl font-bold text-green-300 mb-4">How to Earn Using NFTs</h2>
-      <ol class="list-decimal list-inside space-y-4 text-gray-200">
-        <li><strong>Create & Sell NFTs (Artist/Creator)</strong>
-          <ul class="list-disc ml-5">
-            <li>Upload your content.</li>
-            <li>Mint it as an NFT.</li>
-            <li>List on a marketplace.</li>
-            <li>Earn from sales and royalties.</li>
-          </ul>
-        </li>
-        <li><strong>Trade NFTs (Investor/Collector)</strong>
-          <ul class="list-disc ml-5">
-            <li>Buy low, sell high.</li>
-            <li>Flip rare or trending NFTs.</li>
-          </ul>
-        </li>
-        <li><strong>Earn Royalties</strong> – Set a royalty and earn passively from resales.</li>
-        <li><strong>Play-to-Earn Games</strong> – Use NFTs in games to earn crypto rewards.</li>
-        <li><strong>Stake NFTs</strong> – Earn tokens by staking NFTs.</li>
-        <li><strong>Access/Membership</strong> – Sell NFTs that unlock VIP features or exclusive drops.</li>
-      </ol>
-    </section>
+        <div class="slide">
+            <h2>NFTs and Their Relationship to Digital Assets</h2>
+            <ul>
+                <li>Digital assets include anything stored digitally: images, videos, music, software, etc.</li>
+                <li><strong>NFTs represent ownership and scarcity</strong> of these assets.</li>
+                <li>Think of NFTs as the certificate of authenticity and title deed for digital content.</li>
+                <li>Without NFTs, digital files can be copied infinitely. With NFTs, ownership is provable and secure.</li>
+            </ul>
+            <div class="conclusion">
+                <p><strong>Conclusion:</strong> NFTs bring value, uniqueness, and traceability to digital assets.</p>
+            </div>
+        </div>
 
-    <!-- Slide 6 -->
-    <section>
-      <h2 class="text-3xl font-bold text-yellow-300 mb-4">What to Watch Out For</h2>
-      <ul class="list-disc list-inside space-y-2 text-gray-200">
-        <li>🚨 Market volatility – prices can rise or crash fast.</li>
-        <li>🚨 Scams or rug pulls – verify before buying.</li>
-        <li>⚠️ Gas fees – Ethereum can be expensive.</li>
-        <li>🛡️ Platform trust – use reliable marketplaces.</li>
-      </ul>
-      <p class="mt-4 font-semibold">Tip: Start small. Learn. Use wallet security (cold wallet, 2FA).</p>
-    </section>
+        <div class="slide">
+            <h2>The Purpose of an NFT Marketplace</h2>
+            <ul>
+                <li>A platform where creators, buyers, and sellers meet.</li>
+                <li><strong>Examples:</strong> OpenSea, Blur, Magic Eden, Coreverse Marketplace (custom), PiNFT, etc.</li>
+                <li>Provides tools to:
+                    <ul>
+                        <li>Mint (create) NFTs</li>
+                        <li>List & sell NFTs</li>
+                        <li>Buy & trade NFTs</li>
+                        <li>View ownership history, royalties, and collection stats</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="conclusion">
+                <p><strong>Purpose:</strong> NFT marketplaces create an economy for digital assets, making them liquid, accessible, and valuable.</p>
+            </div>
+        </div>
 
-    <!-- Slide 7 -->
-    <section>
-      <h2 class="text-3xl font-bold text-green-300 mb-4">NFTs Are the Future of Digital Economy</h2>
-      <ul class="list-disc list-inside space-y-2 text-gray-200">
-        <li>Ownership, creativity, and income are being redefined by NFTs.</li>
-        <li>Creators, collectors, and developers can all benefit.</li>
-        <li>Success depends on your <strong>strategy and timing</strong>.</li>
-      </ul>
-      <p class="mt-4 font-semibold">Closing Line: Explore. Create. Earn. The NFT revolution is just beginning.</p>
-    </section>
+        <div class="slide">
+            <h2>How to Earn Using NFTs</h2>
+            <ul class="how-to-earn-list">
+                <li>
+                    <strong>Create & Sell NFTs (Artist/Creator)</strong>
+                    <p>Upload art, music, photos, or 3D models. Mint your creation as an NFT. List it on a marketplace. Earn income from the initial sale and royalties from resales.</p>
+                </li>
+                <li>
+                    <strong>Trade NFTs (Investor/Collector)</strong>
+                    <p>Buy low, sell high. Find rare or trending NFTs and flip them for a profit. Similar to trading stocks or crypto, but based on scarcity and demand.</p>
+                </li>
+                <li>
+                    <strong>Earn Royalties</strong>
+                    <p>Set a royalty percentage during minting. Every time the NFT resells, you earn a passive income.</p>
+                </li>
+                <li>
+                    <strong>Play-to-Earn Games</strong>
+                    <p>Use NFT characters or items in blockchain games. Win rewards that can be sold or traded for crypto.</p>
+                </li>
+                <li>
+                    <strong>Stake NFTs</strong>
+                    <p>Some platforms allow staking NFTs to earn tokens or rewards.</p>
+                </li>
+                <li>
+                    <strong>Use NFTs for Access or Membership</strong>
+                    <p>Exclusive NFTs can be sold that give VIP access, early drops, or premium content.</p>
+                </li>
+            </ul>
+        </div>
 
-    <!-- Slide 8 -->
-    <section>
-      <h2 class="text-3xl font-bold text-blue-300 mb-4">Have Questions? Ready to Start?</h2>
-      <p class="text-gray-200 mb-2">❓ Drop your questions below!</p>
-      <p class="text-gray-200 mb-2">🚀 Want to launch your own NFT collection or marketplace?</p>
-      <p class="text-green-400 font-bold">Join our community and let’s build the future together! 🌐</p>
-    </section>
+        <div class="slide">
+            <h2>What to Watch Out For</h2>
+            <ul class="risks">
+                <li><strong>Market volatility</strong> – prices can go up or down fast.</li>
+                <li><strong>Scams or rug pulls</strong> – always verify collections and creators.</li>
+                <li><strong>Gas fees</strong> – Ethereum NFTs can have high transaction costs.</li>
+                <li><strong>Platform trust</strong> – choose reliable marketplaces.</li>
+            </ul>
+            <div class="tip">
+                <p><strong>Tip:</strong> Start small. Learn. And use wallet security like cold wallets or 2FA.</p>
+            </div>
+        </div>
 
-    <!-- Bonus Tip -->
-    <section class="border-t border-gray-700 pt-8">
-      <h2 class="text-2xl font-bold text-purple-400 mb-2">💡 Bonus Tips for Presenters:</h2>
-      <ul class="list-disc list-inside text-gray-300 space-y-2">
-        <li>🎥 Use AI voiceover to narrate this presentation.</li>
-        <li>📊 Add visual examples (screenshots, NFT art, graphs).</li>
-        <li>🔗 Link to tools like MetaMask, Trust Wallet.</li>
-        <li>💸 Add disclaimer: <em>“Not financial advice. Always DYOR.”</em></li>
-      </ul>
-    </section>
+        <div class="slide final-thoughts">
+            <h2>NFTs Are the Future of the Digital Economy</h2>
+            <ul>
+                <li>NFTs are reshaping how we see ownership, creativity, and income online.</li>
+                <li>Whether you're a creator, collector, or entrepreneur, NFTs open new doors.</li>
+                <li>Marketplaces make access easy — but your strategy and timing matter.</li>
+            </ul>
+            <p class="closing-line">Explore. Create. Earn. The NFT revolution is just beginning.</p>
+        </div>
 
-  </div>
+    </div>
+
 </body>
 </html>
