@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFT Presentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
         
@@ -207,26 +208,52 @@
             text-transform: uppercase;
         }
 
-        .navigation {
+        .navigation-buttons {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .nav-btn {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 2rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+            transform: scale(1.1);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .slide-counter {
             position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            background-color: #ccc;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .nav-dot.active {
-            background-color: var(--secondary-color);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -351,46 +378,60 @@
             </div>
         </div>
 
-        <div class="navigation">
-            <div class="nav-dot active" onclick="goToSlide(0)"></div>
-            <div class="nav-dot" onclick="goToSlide(1)"></div>
-            <div class="nav-dot" onclick="goToSlide(2)"></div>
-            <div class="nav-dot" onclick="goToSlide(3)"></div>
-            <div class="nav-dot" onclick="goToSlide(4)"></div>
-            <div class="nav-dot" onclick="goToSlide(5)"></div>
-            <div class="nav-dot" onclick="goToSlide(6)"></div>
+        <div class="navigation-buttons">
+            <button class="nav-btn prev-btn" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+            <button class="nav-btn next-btn" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
         </div>
+
+        <div class="slide-counter">Slide 1 of 7</div>
     </div>
 
     <script>
         const slideContainer = document.querySelector('.slide-container');
-        const dots = document.querySelectorAll('.nav-dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const slideCounter = document.querySelector('.slide-counter');
         let currentSlide = 0;
-        const totalSlides = dots.length;
+        const totalSlides = document.querySelectorAll('.slide').length;
 
-        function goToSlide(index) {
-            currentSlide = index;
+        function updateSlide() {
             slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-            updateDots();
+            slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+            prevBtn.classList.toggle('disabled', currentSlide === 0);
+            nextBtn.classList.toggle('disabled', currentSlide === totalSlides - 1);
         }
 
-        function updateDots() {
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        });
 
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        });
+        
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') {
                 if (currentSlide < totalSlides - 1) {
-                    goToSlide(currentSlide + 1);
+                    currentSlide++;
+                    updateSlide();
                 }
             } else if (e.key === 'ArrowLeft') {
                 if (currentSlide > 0) {
-                    goToSlide(currentSlide - 1);
+                    currentSlide--;
+                    updateSlide();
                 }
             }
         });
+
+        updateSlide(); // Initial update
     </script>
 
 </body>
