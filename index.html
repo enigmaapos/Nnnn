@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFT Presentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
+        
         :root {
             --primary-color: #4A4A4A;
             --secondary-color: #007BFF;
@@ -56,7 +57,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            overflow-y: auto;
         }
 
         .title-slide {
@@ -108,7 +108,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             font-size: 1.2rem;
         }
-
+        
         .slide-content li {
             border-left-color: var(--accent-color);
         }
@@ -163,7 +163,7 @@
         .risks-list li strong {
             color: #dc3545;
         }
-
+        
         .risks-list li p {
             margin: 0;
             font-size: 1rem;
@@ -208,179 +208,231 @@
             text-transform: uppercase;
         }
 
-        .navigation {
+        .navigation-buttons {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .nav-btn {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 2rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+            transform: scale(1.1);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .slide-counter {
             position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            background-color: #ccc;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .nav-dot.active {
-            background-color: var(--secondary-color);
-        }
-
-        .marketplace-logos {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 25px;
-        }
-
-        .marketplace-logos div {
-            flex: 1 1 120px;
-            text-align: center;
-        }
-
-        .marketplace-logos img {
-            height: 50px;
-            margin-bottom: 10px;
-            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 1rem;
         }
     </style>
 </head>
 <body>
 
-<div class="presentation-container">
-    <div class="slide-container">
+    <div class="presentation-container">
+        <div class="slide-container">
 
-        <div class="slide title-slide">
-            <h1>NFTs: The Future of Digital Ownership and Income</h1>
-            <p>Unlocking the Value of Digital Assets Through Blockchain Technology</p>
-        </div>
+            <div class="slide title-slide">
+                <h1>NFTs: The Future of Digital Ownership and Income</h1>
+                <p>Unlocking the Value of Digital Assets Through Blockchain Technology</p>
+            </div>
 
-        <div class="slide">
-            <h2>What is an NFT? (Non-Fungible Token)</h2>
-            <div class="slide-content">
-                <ul>
-                    <li><strong>NFT</strong> stands for Non-Fungible Token.</li>
-                    <li>It’s a unique digital asset stored on a blockchain.</li>
-                    <li>Unlike cryptocurrencies (like Bitcoin or Ethereum), NFTs are not interchangeable.</li>
-                    <li>Each NFT has its own metadata, ownership record, and digital proof of authenticity.</li>
-                </ul>
-                <div class="examples">
-                    <p><strong>Examples:</strong> 🎨 Digital Art | 🎮 Game Items | 🎵 Music | 📸 Collectibles</p>
+            <div class="slide">
+                <h2>What is an NFT? (Non-Fungible Token)</h2>
+                <div class="slide-content">
+                    <ul>
+                        <li><strong>NFT</strong> stands for Non-Fungible Token.</li>
+                        <li>It’s a unique digital asset stored on a blockchain.</li>
+                        <li>Unlike cryptocurrencies (like Bitcoin or Ethereum), NFTs are not interchangeable.</li>
+                        <li>Each NFT has its own metadata, ownership record, and digital proof of authenticity.</li>
+                    </ul>
+                    <div class="examples">
+                        <p><strong>Examples:</strong> 🎨 Digital Art | 🎮 Game Items | 🎵 Music | 📸 Collectibles</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>NFTs and Their Relationship to Digital Assets</h2>
+                <div class="slide-content">
+                    <ul>
+                        <li>Digital assets include anything stored digitally: images, videos, music, software, etc.</li>
+                        <li><strong>NFTs represent ownership and scarcity</strong> of these assets.</li>
+                        <li>Think of NFTs as the certificate of authenticity and title deed for digital content.</li>
+                        <li>Without NFTs, digital files can be copied infinitely. With NFTs, ownership is provable and secure.</li>
+                    </ul>
+                    <div class="conclusion">
+                        <p><strong>Conclusion:</strong> NFTs bring value, uniqueness, and traceability to digital assets.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>The Purpose of an NFT Marketplace</h2>
+                <div class="slide-content">
+                    <ul>
+                        <li>A platform where creators, buyers, and sellers meet.</li>
+                        <li><strong>Examples:</strong> OpenSea, Blur, Magic Eden, Coreverse Marketplace (custom), <a href="https://opensea.io/collection/team-ayos" target="_blank">team-ayos (OpenSea)</a>, PiNFT, etc.</li>
+                        <li>Provides tools to:
+                            <ul>
+                                <li>Mint (create) NFTs</li>
+                                <li>List & sell NFTs</li>
+                                <li>Buy & trade NFTs</li>
+                                <li>View ownership history, royalties, and collection stats</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="conclusion">
+                        <p><strong>Purpose:</strong> NFT marketplaces create an economy for digital assets, making them liquid, accessible, and valuable.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>How to Earn Using NFTs</h2>
+                <div class="slide-content">
+                    <ul class="how-to-earn-list">
+                        <li>
+                            <strong>Create & Sell NFTs (Artist/Creator)</strong>
+                            <p>Upload art, music, photos, or 3D models. Mint your creation as an NFT. List it on a marketplace. Earn income from the initial sale and royalties from resales.</p>
+                        </li>
+                        <li>
+                            <strong>Trade NFTs (Investor/Collector)</strong>
+                            <p>Buy low, sell high. Find rare or trending NFTs and flip them for a profit. Similar to trading stocks or crypto, but based on scarcity and demand.</p>
+                        </li>
+                        <li>
+                            <strong>Earn Royalties</strong>
+                            <p>Set a royalty percentage during minting. Every time the NFT resells, you earn a passive income.</p>
+                        </li>
+                        <li>
+                            <strong>Play-to-Earn Games</strong>
+                            <p>Use NFT characters or items in blockchain games. Win rewards that can be sold or traded for crypto.</p>
+                        </li>
+                        <li>
+                            <strong>Stake NFTs</strong>
+                            <p>Some platforms allow staking NFTs to earn tokens or rewards.</p>
+                        </li>
+                        <li>
+                            <strong>Use NFTs for Access or Membership</strong>
+                            <p>Exclusive NFTs can be sold that give VIP access, early drops, or premium content.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>What to Watch Out For</h2>
+                <div class="slide-content">
+                    <ul class="risks-list">
+                        <li><strong>Market volatility</strong> – prices can go up or down fast.</li>
+                        <li><strong>Scams or rug pulls</strong> – always verify collections and creators.</li>
+                        <li><strong>Gas fees</strong> – Ethereum NFTs can have high transaction costs.</li>
+                        <li><strong>Platform trust</strong> – choose reliable marketplaces.</li>
+                    </ul>
+                    <div class="tip">
+                        <p><strong>Tip:</strong> Start small. Learn. And use wallet security like cold wallets or 2FA.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide final-thoughts">
+                <h2>NFTs Are the Future of the Digital Economy</h2>
+                <div class="slide-content">
+                    <ul>
+                        <li>NFTs are reshaping how we see ownership, creativity, and income online.</li>
+                        <li>Whether you're a creator, collector, or entrepreneur, NFTs open new doors.</li>
+                        <li>Marketplaces make access easy — but your strategy and timing matter.</li>
+                    </ul>
+                    <p class="closing-line">Explore. Create. Earn. The NFT revolution is just beginning.</p>
                 </div>
             </div>
         </div>
 
-        <div class="slide">
-            <h2>NFTs and Their Relationship to Digital Assets</h2>
-            <div class="slide-content">
-                <ul>
-                    <li>Digital assets include anything stored digitally: images, videos, music, software, etc.</li>
-                    <li><strong>NFTs represent ownership and scarcity</strong> of these assets.</li>
-                    <li>Think of NFTs as the certificate of authenticity and title deed for digital content.</li>
-                    <li>Without NFTs, digital files can be copied infinitely. With NFTs, ownership is provable and secure.</li>
-                </ul>
-                <div class="conclusion">
-                    <p><strong>Conclusion:</strong> NFTs bring value, uniqueness, and traceability to digital assets.</p>
-                </div>
-            </div>
+        <div class="navigation-buttons">
+            <button class="nav-btn prev-btn" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+            <button class="nav-btn next-btn" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
         </div>
 
-        <div class="slide">
-            <h2>The Purpose of an NFT Marketplace</h2>
-            <div class="slide-content">
-                <ul>
-                    <li>A platform where creators, buyers, and sellers meet.</li>
-                    <li><strong>Examples:</strong></li>
-                </ul>
-
-                <div class="marketplace-logos">
-                    <div>
-                        <img src="https://opensea.io/static/images/logos/opensea.svg" alt="OpenSea">
-                        <p>OpenSea</p>
-                    </div>
-                    <div>
-                        <img src="https://pbs.twimg.com/profile_images/1600923843631081473/M-yaED8l_400x400.jpg" alt="Blur">
-                        <p>Blur</p>
-                    </div>
-                    <div>
-                        <img src="https://magiceden.io/static/media/magiceden-icon.197cbebc.svg" alt="Magic Eden">
-                        <p>Magic Eden</p>
-                    </div>
-                    <div>
-                        <img src="https://via.placeholder.com/50x50.png?text=Coreverse" alt="Coreverse Marketplace">
-                        <p>Coreverse Marketplace</p>
-                    </div>
-                    <div>
-                        <img src="https://via.placeholder.com/50x50.png?text=PiNFT" alt="PiNFT">
-                        <p>PiNFT</p>
-                    </div>
-                </div>
-
-                <ul>
-                    <li>Provides tools to:
-                        <ul>
-                            <li>Mint (create) NFTs</li>
-                            <li>List & sell NFTs</li>
-                            <li>Buy & trade NFTs</li>
-                            <li>View ownership history, royalties, and collection stats</li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="conclusion">
-                    <p><strong>Purpose:</strong> NFT marketplaces create an economy for digital assets, making them liquid, accessible, and valuable.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Remaining slides from your original code continue here unchanged... -->
-        <!-- Slide: How to Earn Using NFTs -->
-        <!-- Slide: What to Watch Out For -->
-        <!-- Slide: Final Thoughts -->
-
+        <div class="slide-counter">Slide 1 of 7</div>
     </div>
 
-    <div class="navigation">
-        <div class="nav-dot active" onclick="goToSlide(0)"></div>
-        <div class="nav-dot" onclick="goToSlide(1)"></div>
-        <div class="nav-dot" onclick="goToSlide(2)"></div>
-        <div class="nav-dot" onclick="goToSlide(3)"></div>
-        <div class="nav-dot" onclick="goToSlide(4)"></div>
-        <div class="nav-dot" onclick="goToSlide(5)"></div>
-        <div class="nav-dot" onclick="goToSlide(6)"></div>
-    </div>
-</div>
+    <script>
+        const slideContainer = document.querySelector('.slide-container');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const slideCounter = document.querySelector('.slide-counter');
+        let currentSlide = 0;
+        const totalSlides = document.querySelectorAll('.slide').length;
 
-<script>
-    const slideContainer = document.querySelector('.slide-container');
-    const dots = document.querySelectorAll('.nav-dot');
-    let currentSlide = 0;
-    const totalSlides = dots.length;
-
-    function goToSlide(index) {
-        currentSlide = index;
-        slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-        updateDots();
-    }
-
-    function updateDots() {
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
-        });
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
-            goToSlide(currentSlide + 1);
-        } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
-            goToSlide(currentSlide - 1);
+        function updateSlide() {
+            slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+            slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+            prevBtn.classList.toggle('disabled', currentSlide === 0);
+            nextBtn.classList.toggle('disabled', currentSlide === totalSlides - 1);
         }
-    });
-</script>
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateSlide();
+                }
+            } else if (e.key === 'ArrowLeft') {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlide();
+                }
+            }
+        });
+
+        updateSlide(); // Initial update
+    </script>
 
 </body>
 </html>
