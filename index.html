@@ -3,104 +3,165 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>NFT — Futuristic Presentation (Professional)</title>
+  <title>NFT Presentation — Futuristic (Professional)</title>
+
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#071323;
-      --card-bg: rgba(255,255,255,0.03);
-      --muted: #9fb0c9;
-      --accent: #2de1ff;
-      --accent-2: #67a7ff;
-      --glass: rgba(255,255,255,0.04);
-      --radius: 14px;
+      --muted:#9fb0c9;
+      --accent:#2de1ff;
+      --accent-2:#67a7ff;
+      --glass: rgba(255,255,255,0.03);
+      --card-radius:14px;
       --max-width:1200px;
     }
+
+    /* base */
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#e6f1ff;background:var(--bg);-webkit-font-smoothing:antialiased}
-    /* container */
-    .wrap{max-width:var(--max-width);margin:20px auto;height:calc(100vh - 40px);position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 50px rgba(2,6,23,0.7)}
-    /* sticky left panel (info) */
-    .left {
-      position:absolute;left:20px;top:20px;bottom:20px;width:360px;padding:28px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,0.04);
-      display:flex;flex-direction:column;gap:12px;z-index:60;
+    html,body{height:100%;margin:0;background:var(--bg);color:#e6f7ff;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial; -webkit-font-smoothing:antialiased}
+    a{color:inherit}
+
+    /* Outer container */
+    .container{
+      max-width:var(--max-width);
+      height:calc(100vh - 32px);
+      margin:16px auto;
+      display:flex;
+      position:relative;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.04);
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
+      box-shadow: 0 20px 60px rgba(2,6,23,0.6);
     }
-    .brand {display:flex;gap:12px;align-items:center}
-    .logo {
-      width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:700;color:#041024; font-size:18px;box-shadow:0 6px 22px rgba(34,211,238,0.06);
+
+    /* Left sticky panel (presenter controls / notes) */
+    .panel{
+      width:360px;
+      padding:22px;
+      border-right:1px solid rgba(255,255,255,0.03);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      z-index:60;
     }
-    .title {font-size:18px;font-weight:700;letter-spacing:0.2px}
-    .subtitle {font-size:13px;color:var(--muted);margin-top:-2px}
-    .meta {margin-top:10px;color:var(--muted);font-size:13px}
-    .controls {margin-top:auto;display:flex;gap:10px;align-items:center}
-    .btn {
-      background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 12px;border-radius:10px;color:var(--muted);cursor:pointer;font-weight:600;
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:10px;display:grid;place-items:center;font-weight:700;color:#041224;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+    .panel h1{font-size:16px;margin:0}
+    .panel p{margin:0;color:var(--muted);font-size:13px}
+    .meta{font-size:13px;color:var(--muted)}
+
+    .panel .controls{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    .btn{
+      border-radius:10px;padding:10px 12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer;font-weight:600;font-size:13px;
     }
-    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#031224;border:none;box-shadow:0 8px 30px rgba(34,211,238,0.08)}
-    .small {font-size:12px;color:var(--muted)}
-    /* slides area */
-    .slides {
-      position:relative; height:100%; margin-left:420px; overflow-y:scroll; scroll-snap-type:y mandatory; -webkit-overflow-scrolling:touch;
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041224;border:none;box-shadow:0 8px 26px rgba(34,211,238,0.06)}
+
+    .small{font-size:12px;color:var(--muted)}
+    .slide-count{margin-top:auto;padding-top:10px;border-top:1px dashed rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)}
+
+    /* Slides area (scroll-snap container) */
+    .slides{
+      flex:1; overflow-y:scroll; scroll-snap-type:y mandatory; -webkit-overflow-scrolling:touch; position:relative;
       scroll-behavior:smooth;
+      padding:22px;
     }
-    section.slide { min-height:100vh; width:calc(100% - 420px); padding:60px 80px; display:grid; grid-template-columns: 1fr 520px; gap:36px; align-items:center; scroll-snap-align:start; position:relative; }
-    /* background image panel */
-    .bg-panel {position:relative;height:70vh;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
-    .bg-panel img {width:100%; height:100%; object-fit:cover; display:block; transform:translateZ(0);}
-    .bg-overlay {position:absolute;inset:0;background:linear-gradient(180deg, rgba(3,8,20,0.2), rgba(3,8,20,0.45)); mix-blend-mode: multiply; pointer-events:none}
-    .slide h2 {font-size:32px;margin:0 0 10px;color: #e6f7ff}
-    .lead {color:var(--muted);font-size:16px;margin-bottom:16px}
-    .bullets {list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
-    .bullets li {background:var(--glass);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.035);color:#ddf0ff}
-    .bullets li strong {color:var(--accent-2)}
-    .note {margin-top:18px;padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(45,225,255,0.04), rgba(103,167,255,0.03));border-left:4px solid var(--accent);color:#caf6ff}
-    /* small footer counter in left panel */
-    .slide-count {font-size:13px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:8px;border-top:1px dashed rgba(255,255,255,0.03)}
-    /* progress bar */
-    .top-progress{position:absolute;left:0;right:0;top:0;height:6px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));z-index:80}
-    .top-progress > i {display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width 420ms cubic-bezier(.2,.9,.3,1)}
-    /* nav arrows (floating) */
-    .nav-float {position:fixed; right:28px; bottom:28px; display:flex; gap:12px; z-index:90}
-    .circle {width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);cursor:pointer;box-shadow:0 12px 30px rgba(2,6,23,0.6)}
-    .circle:hover{transform:translateY(-4px);transition:all .18s ease}
-    .circle svg{width:18px;height:18px;fill:var(--accent-2)}
-    /* animations */
-    .reveal {opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.9,.3,1)}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-    /* responsive */
+
+    /* Each slide (full viewport height inside container) */
+    .slide{
+      min-height:calc(100vh - 44px); /* subtract container padding */
+      scroll-snap-align:start;
+      display:grid;
+      grid-template-columns: 1fr 520px;
+      gap:28px;
+      align-items:center;
+      position:relative;
+      padding:48px;
+      box-sizing:border-box;
+    }
+
     @media (max-width:1100px){
-      .left{display:none}
-      .slides{margin-left:0}
-      section.slide{grid-template-columns:1fr; padding:40px}
+      .panel{display:none}
+      .slide{grid-template-columns:1fr; padding:34px}
+      .slides{padding:18px}
     }
+
+    /* Text column */
+    .text {
+      color:#e9f6ff;
+      max-width:760px;
+    }
+    .text h2{margin:0 0 8px;font-size:32px}
+    .lead{color:var(--muted);margin:0 0 14px;font-size:15px}
+    .bullets{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+    .bullets li{background:var(--glass);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .bullets li strong{color:var(--accent-2)}
+    .note{margin-top:14px;padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(45,225,255,0.03), rgba(103,167,255,0.02)); color:#c9f6ff;font-weight:600}
+
+    /* Visual column - image panel */
+    .visual{
+      height:64vh;border-radius:var(--card-radius);overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 16px 48px rgba(2,6,23,0.5); background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
+      display:grid;place-items:center;
+    }
+    .visual img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1);transition:transform 700ms cubic-bezier(.2,.9,.3,1)}
+    .visual .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(3,8,20,0.18), rgba(3,8,20,0.45));mix-blend-mode:multiply;pointer-events:none}
+    .caption{position:absolute;left:18px;bottom:18px;background:rgba(0,0,0,0.35);padding:8px 12px;border-radius:8px;font-size:13px;color:#e2f8ff;border:1px solid rgba(255,255,255,0.03)}
+
+    /* Progress bar top (sticky) */
+    .progress-top{position:absolute;left:0;right:0;top:0;height:6px;background:rgba(255,255,255,0.02);z-index:80}
+    .progress-top > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width 420ms cubic-bezier(.2,.9,.3,1)}
+
+    /* Floating nav buttons */
+    .nav-floating{position:fixed;right:20px;bottom:20px;display:flex;gap:10px;z-index:90}
+    .circle{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+    .circle svg{width:18px;height:18px;fill:var(--accent-2)}
+    .circle:active{transform:translateY(2px)}
+
+    /* reveal animation helper */
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.9,.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* placeholder when image missing */
+    .placeholder{
+      width:100%;height:100%;display:grid;place-items:center;color:var(--muted);font-weight:600;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      font-size:16px;padding:20px;text-align:center;
+    }
+
+    /* small responsive adjustments */
     @media (max-width:620px){
-      .bg-panel{height:44vh}
-      .slide h2{font-size:22px}
+      .visual{height:40vh}
+      .text h2{font-size:20px}
     }
   </style>
 </head>
 <body>
-  <div class="wrap" role="application" aria-label="NFT presentation">
-    <!-- top progress -->
-    <div class="top-progress" aria-hidden="true"><i></i></div>
+  <div class="container" role="application" aria-label="NFT Presentation">
+    <!-- Top progress bar -->
+    <div class="progress-top" aria-hidden="true"><i></i></div>
 
-    <!-- left sticky info / controls -->
-    <aside class="left" aria-hidden="false">
+    <!-- Left panel: notes & controls -->
+    <aside class="panel" aria-label="Presentation controls">
       <div class="brand">
         <div class="logo">NFT</div>
         <div>
-          <div class="title">NFTs — Futuristic Presentation</div>
-          <div class="subtitle">Digital Ownership & Income — Sci-Fi Theme</div>
+          <h1>Futuristic NFT Deck</h1>
+          <p class="small">Clean, professional, and easy to present.</p>
         </div>
       </div>
 
-      <div class="meta">Professional full-screen slides with scroll-snap, keyboard & touch gestures, parallax backgrounds.</div>
+      <p class="meta">Use scroll, touch swipe, wheel, or arrow keys to navigate. Drop images in <code>assets/slide#.png</code>. Lazy-loading will load images when needed.</p>
 
-      <div style="margin-top:16px">
-        <div style="font-size:13px;color:var(--muted)">How to use</div>
-        <ol style="padding-left:16px;margin:8px 0;color:var(--muted);font-size:13px;line-height:1.5">
-          <li>Drop your AI images in <code>assets/slide1.png</code> ... <code>slide7.png</code>.</li>
-          <li>Open this file in a modern browser. Scroll or use arrows to navigate.</li>
+      <div style="margin-top:8px">
+        <div style="font-size:13px;color:var(--muted)">Quick tips</div>
+        <ol style="color:var(--muted);padding-left:16px;margin:8px 0;font-size:13px;line-height:1.5">
+          <li>Start: press the Start button.</li>
+          <li>Use ← ↑ and → ↓ for navigation.</li>
+          <li>On mobile: swipe up/down between slides.</li>
         </ol>
       </div>
 
@@ -109,275 +170,294 @@
         <button class="btn primary" id="btn-start" title="Start presentation">Start</button>
       </div>
 
-      <div class="slide-count small" style="margin-top:14px">
-        <div>Slide <span id="current">1</span> / <span id="total">7</span></div>
-        <div class="small">Press ← → or use wheel</div>
+      <div class="slide-count">
+        <div>Slide <strong id="current">1</strong> / <strong id="total">7</strong></div>
+        <div class="small">Press Home / End to jump</div>
       </div>
     </aside>
 
-    <!-- slides scroll area -->
-    <main class="slides" id="slides" tabindex="0" role="region" aria-label="Slides">
-      <!-- Slide 1 -->
-      <section class="slide" data-index="1">
-        <div>
+    <!-- Slides container -->
+    <main class="slides" id="slides" role="region" aria-label="Slides" tabindex="0">
+      <!-- Slide template (7 slides) - swap content as desired -->
+      <section class="slide" data-index="1" aria-label="Slide 1">
+        <div class="text">
           <h2 class="reveal">NFTs: The Future of Digital Ownership and Income</h2>
-          <p class="lead reveal">Unlocking the value of digital assets through blockchain technology — immersive, verifiable ownership and new income models for creators.</p>
+          <p class="lead reveal">Unlocking the value of digital assets through blockchain technology — verifiable ownership, programmable assets, and new income models for creators.</p>
+
           <ul class="bullets">
-            <li class="reveal"><strong>Unique</strong> digital ownership backed by blockchain.</li>
-            <li class="reveal"><strong>Provable</strong> provenance and automated royalties.</li>
-            <li class="reveal"><strong>Programmable</strong> assets that can unlock access & experiences.</li>
+            <li class="reveal"><strong>Unique</strong> digital ownership backed on chain.</li>
+            <li class="reveal"><strong>Provable</strong> provenance & programmable royalties.</li>
+            <li class="reveal"><strong>Utility</strong> — access, membership, and in-game value.</li>
           </ul>
-          <div class="note reveal">Tip: Use the left panel to add notes, or hide for a focused presentation.</div>
+
+          <div class="note reveal">Tip: Keep this slide as a title / opening visual for strong impact.</div>
         </div>
 
-        <div class="bg-panel" aria-hidden="true">
-          <img data-src="assets/slide1.png" alt="Futuristic holographic NFT scene (slide 1)" />
-          <div class="bg-overlay"></div>
+        <div class="visual" aria-hidden="true">
+          <!-- Use your AI image here. If file missing, a placeholder shows automatically via JS -->
+          <img data-src="assets/slide1.png" alt="Futuristic holographic NFT scene (slide 1)">
+          <div class="overlay"></div>
+          <div class="caption">Slide 1 • Title</div>
         </div>
       </section>
 
-      <!-- Slide 2 -->
-      <section class="slide" data-index="2">
-        <div>
+      <section class="slide" data-index="2" aria-label="Slide 2">
+        <div class="text">
           <h2 class="reveal">What is an NFT?</h2>
-          <p class="lead reveal">Non-fungible tokens are unique digital identifiers recorded on a blockchain that prove ownership and authenticity of a digital item.</p>
+          <p class="lead reveal">Non-fungible tokens are unique identifiers on a blockchain proving ownership and authenticity of a digital item.</p>
+
           <ul class="bullets">
-            <li class="reveal"><strong>NFT</strong> stands for Non-Fungible Token.</li>
-            <li class="reveal">Each NFT contains metadata & provenance.</li>
-            <li class="reveal">Not interchangeable — uniqueness creates scarcity and value.</li>
+            <li class="reveal"><strong>NFT</strong> — Non-Fungible Token</li>
+            <li class="reveal">Contains metadata & history</li>
+            <li class="reveal">Uniqueness creates scarcity and value</li>
           </ul>
-          <div class="note reveal">Example: Art, music, in-game items, domain names, membership passes.</div>
+
+          <div class="note reveal">Examples: art, music, game items, domain names, membership passes.</div>
         </div>
 
-        <div class="bg-panel" aria-hidden="true">
-          <img data-src="assets/slide2.png" alt="NFT explanation visual (slide 2)" />
-          <div class="bg-overlay"></div>
+        <div class="visual" aria-hidden="true">
+          <img data-src="assets/slide2.png" alt="NFT explanation visual (slide 2)">
+          <div class="overlay"></div>
+          <div class="caption">Slide 2 • Definition</div>
         </div>
       </section>
 
-      <!-- Slide 3 -->
-      <section class="slide" data-index="3">
-        <div>
+      <section class="slide" data-index="3" aria-label="Slide 3">
+        <div class="text">
           <h2 class="reveal">NFTs & Digital Assets</h2>
-          <p class="lead reveal">NFTs act as a certificate of authenticity for any digital asset, making digital scarcity and true ownership feasible.</p>
+          <p class="lead reveal">NFTs function as digital certificates that add scarcity and provenance to otherwise-copyable files.</p>
+
           <ul class="bullets">
-            <li class="reveal">Tokenize images, audio, video, 3D models, and more.</li>
-            <li class="reveal"><strong>Traceable</strong> ownership history — transparent on chain.</li>
-            <li class="reveal">Royalties: creators can earn resale fees automatically.</li>
+            <li class="reveal">Tokenize images, audio, video, 3D models</li>
+            <li class="reveal"><strong>Traceable</strong> ownership history</li>
+            <li class="reveal">Automated royalties for creators</li>
           </ul>
-          <div class="note reveal">Conclusion: NFTs add provenance, scarcity, and economic value to digital content.</div>
+
+          <div class="note reveal">Conclusion: provenance + scarcity = economic value for digital goods.</div>
         </div>
 
-        <div class="bg-panel" aria-hidden="true">
-          <img data-src="assets/slide3.png" alt="Tokens and certificates visual (slide 3)" />
-          <div class="bg-overlay"></div>
+        <div class="visual" aria-hidden="true">
+          <img data-src="assets/slide3.png" alt="Holographic certificate overlaying various digital media (slide 3)">
+          <div class="overlay"></div>
+          <div class="caption">Slide 3 • Relationship to Digital Assets</div>
         </div>
       </section>
 
-      <!-- Slide 4 -->
-      <section class="slide" data-index="4">
-        <div>
+      <section class="slide" data-index="4" aria-label="Slide 4">
+        <div class="text">
           <h2 class="reveal">NFT Marketplaces</h2>
-          <p class="lead reveal">Marketplaces connect creators and collectors, enabling minting, listing, trading, and analytics.</p>
+          <p class="lead reveal">Marketplaces enable minting, discovery, trading and analytics for creators and collectors.</p>
+
           <ul class="bullets">
-            <li class="reveal"><strong>Discovery</strong> — curated drops and search.</li>
-            <li class="reveal"><strong>Liquidity</strong> — make digital assets tradable.</li>
-            <li class="reveal"><strong>Tools</strong> — royalties, auctions, and collection insights.</li>
+            <li class="reveal"><strong>Discovery</strong> — curated drops & curated lists</li>
+            <li class="reveal"><strong>Liquidity</strong> — buy & sell secondary markets</li>
+            <li class="reveal"><strong>Tools</strong> — auctions, royalties, analytics</li>
           </ul>
-          <div class="note reveal">Examples: OpenSea, Blur, Magic Eden, and smaller curated marketplaces.</div>
+
+          <div class="note reveal">Popular examples: OpenSea, Blur, Magic Eden — choose one that fits your audience and fees.</div>
         </div>
 
-        <div class="bg-panel" aria-hidden="true">
-          <img data-src="assets/slide4.png" alt="Marketplace analytics (slide 4)" />
-          <div class="bg-overlay"></div>
+        <div class="visual" aria-hidden="true">
+          <img data-src="assets/slide4.png" alt="Futuristic marketplace UI with holographic NFT cards (slide 4)">
+          <div class="overlay"></div>
+          <div class="caption">Slide 4 • Marketplaces</div>
         </div>
       </section>
 
-      <!-- Slide 5 -->
-      <section class="slide" data-index="5">
-        <div>
+      <section class="slide" data-index="5" aria-label="Slide 5">
+        <div class="text">
           <h2 class="reveal">How to Earn Using NFTs</h2>
-          <p class="lead reveal">Multiple strategies exist for creators and collectors to earn income.</p>
+          <p class="lead reveal">Creators and collectors can monetize through many routes — primary sales, royalties, trading and play-to-earn.</p>
+
           <ul class="bullets">
-            <li class="reveal"><strong>Create & Sell</strong> — primary sales and minting.</li>
-            <li class="reveal"><strong>Trade</strong> — flipping, investing in rarity.</li>
-            <li class="reveal"><strong>Royalties</strong> — passive income on resales.</li>
-            <li class="reveal"><strong>Play-to-Earn</strong> — in-game economies and item monetization.</li>
+            <li class="reveal"><strong>Create & Sell</strong> — mint and launch drops</li>
+            <li class="reveal"><strong>Trade</strong> — invest in rarity and trends</li>
+            <li class="reveal"><strong>Royalties</strong> — passive income on resales</li>
           </ul>
-          <div class="note reveal">Strategy: diversify, research floor prices, verify collections and roadmap.</div>
+
+          <div class="note reveal">Strategy: research floor prices, community, and roadmap before investing.</div>
         </div>
 
-        <div class="bg-panel" aria-hidden="true">
-          <img data-src="assets/slide5.png" alt="Earning methods visual (slide 5)" />
-          <div class="bg-overlay"></div>
+        <div class="visual" aria-hidden="true">
+          <img data-src="assets/slide5.png" alt="Grid of glowing holographic icons representing NFT earning methods (slide 5)">
+          <div class="overlay"></div>
+          <div class="caption">Slide 5 • Earning Methods</div>
         </div>
       </section>
 
-      <!-- Slide 6 -->
-      <section class="slide" data-index="6">
-        <div>
+      <section class="slide" data-index="6" aria-label="Slide 6">
+        <div class="text">
           <h2 class="reveal">Risks & Best Practices</h2>
-          <p class="lead reveal">Be aware of risks and protect yourself.</p>
+          <p class="lead reveal">Understand common risks and solid security practices to protect funds and reputation.</p>
+
           <ul class="bullets">
-            <li class="reveal"><strong>Volatility</strong> — prices can change quickly.</li>
-            <li class="reveal"><strong>Scams</strong> — verify creators and contracts.</li>
-            <li class="reveal"><strong>Fees</strong> — gas/transaction costs on certain chains.</li>
+            <li class="reveal"><strong>Volatility</strong> — price swings are common</li>
+            <li class="reveal"><strong>Scams</strong> — verify creators and contracts</li>
+            <li class="reveal"><strong>Fees</strong> — watch chain gas or platform costs</li>
           </ul>
-          <div class="note reveal">Tip: Start small; use hardware wallets, enable 2FA, and keep backups of seed phrases.</div>
+
+          <div class="note reveal">Tip: use hardware wallets, enable 2FA, and keep offline backups of your seed phrase.</div>
         </div>
 
-        <div class="bg-panel" aria-hidden="true">
-          <img data-src="assets/slide6.png" alt="Risks visual (slide 6)" />
-          <div class="bg-overlay"></div>
+        <div class="visual" aria-hidden="true">
+          <img data-src="assets/slide6.png" alt="Warning shield and volatile chart (slide 6)">
+          <div class="overlay"></div>
+          <div class="caption">Slide 6 • Risks</div>
         </div>
       </section>
 
-      <!-- Slide 7 -->
-      <section class="slide" data-index="7">
-        <div>
+      <section class="slide" data-index="7" aria-label="Slide 7">
+        <div class="text">
           <h2 class="reveal">Final Thoughts</h2>
-          <p class="lead reveal">NFTs are foundational infrastructure for a programmable digital economy — they unlock new models for ownership and creator income.</p>
+          <p class="lead reveal">NFTs are reshaping digital ownership — combine creativity, utility, and security to capture long-term value.</p>
+
           <ul class="bullets">
-            <li class="reveal">Explore, create, and focus on sustainable value.</li>
-            <li class="reveal">Use royalties & utility to align incentives.</li>
-            <li class="reveal">Stay secure and practice good on-chain hygiene.</li>
+            <li class="reveal">Focus on sustainable utility and community</li>
+            <li class="reveal">Use royalties and token-gated experiences</li>
+            <li class="reveal">Stay secure and remain skeptical of overnight hype</li>
           </ul>
-          <div class="note reveal">Closing: The NFT revolution is accelerating — combine creativity, strategy, and security.</div>
+
+          <div class="note reveal">Closing: Explore, create, and prioritize durability over get-rich-quick schemes.</div>
         </div>
 
-        <div class="bg-panel" aria-hidden="true">
-          <img data-src="assets/slide7.png" alt="Global nodes and connectivity visual (slide 7)" />
-          <div class="bg-overlay"></div>
+        <div class="visual" aria-hidden="true">
+          <img data-src="assets/slide7.png" alt="Global holographic nodes (slide 7)">
+          <div class="overlay"></div>
+          <div class="caption">Slide 7 • Closing</div>
         </div>
       </section>
     </main>
 
     <!-- floating nav -->
-    <div class="nav-float" aria-hidden="false">
-      <div class="circle" id="prevBtn" title="Previous"><svg viewBox="0 0 24 24" focusable="false"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></div>
-      <div class="circle" id="nextBtn" title="Next"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+    <div class="nav-floating" aria-hidden="false">
+      <div class="circle" id="prev" title="Previous slide" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" focusable="false"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </div>
+      <div class="circle" id="next" title="Next slide" aria-label="Next slide">
+        <svg viewBox="0 0 24 24" focusable="false"><path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </div>
     </div>
-
   </div>
 
   <script>
-    (function(){
+    (function () {
       const slidesEl = document.getElementById('slides');
-      const topProgress = document.querySelector('.top-progress > i');
       const slides = Array.from(document.querySelectorAll('section.slide'));
       const total = slides.length;
+      document.getElementById('total').textContent = total;
       const currentEl = document.getElementById('current');
-      const totalEl = document.getElementById('total');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
+      const progress = document.querySelector('.progress-top > i');
+      const prevBtn = document.getElementById('prev');
+      const nextBtn = document.getElementById('next');
       const btnTop = document.getElementById('btn-top');
       const btnStart = document.getElementById('btn-start');
 
-      totalEl.textContent = total;
-
-      // lazy load images on-demand
-      function lazyLoadIn(slide){
+      // lazy-load helper
+      function lazyLoad(slide) {
         const img = slide.querySelector('img[data-src]');
-        if(!img) return;
-        const src = img.getAttribute('data-src');
+        if (!img) return;
+        const src = img.dataset.src;
         img.src = src;
         img.removeAttribute('data-src');
+        // handle missing image gracefully
+        img.onerror = () => {
+          const wrapper = img.parentElement;
+          img.style.display = 'none';
+          if (!wrapper.querySelector('.placeholder')) {
+            const ph = document.createElement('div');
+            ph.className = 'placeholder';
+            ph.innerText = 'Image not found — place image at ' + src;
+            wrapper.appendChild(ph);
+          }
+        };
       }
 
-      // Observe slide in view and animate
+      // intersection observer to reveal content and lazy-load images when slide becomes visible
       const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           const s = entry.target;
           const idx = Number(s.dataset.index || 1);
-          if(entry.isIntersecting){
-            // progress
+          if (entry.isIntersecting) {
+            // update counter + progress
             currentEl.textContent = idx;
-            topProgress.style.width = (idx / total) * 100 + '%';
-            // show reveal elements
-            s.querySelectorAll('.reveal').forEach((el, i) => {
-              setTimeout(()=> el.classList.add('visible'), 80 * i + 80);
-            });
-            // lazy load background image
-            lazyLoadIn(s);
-            // parallax subtle scale
-            const panel = s.querySelector('.bg-panel img');
-            if(panel) panel.style.transform = 'scale(1.03)';
+            progress.style.width = (idx / total) * 100 + '%';
+            // reveal text elements in sequence
+            const reveals = s.querySelectorAll('.reveal');
+            reveals.forEach((el, i) => setTimeout(() => el.classList.add('visible'), 80 * i + 60));
+            // lazy-load image and subtle parallax scale
+            lazyLoad(s);
+            const img = s.querySelector('.visual img');
+            if (img) img.style.transform = 'scale(1.03)';
           } else {
-            // reset reveal for re-entering
+            // hide reveals for re-entry effect
             s.querySelectorAll('.reveal').forEach(el => el.classList.remove('visible'));
-            const panel = s.querySelector('.bg-panel img');
-            if(panel) panel.style.transform = 'scale(1)';
+            const img = s.querySelector('.visual img');
+            if (img) img.style.transform = 'scale(1)';
           }
         });
       }, { root: slidesEl, threshold: 0.4 });
 
-      slides.forEach(slide => { io.observe(slide); });
+      slides.forEach(s => io.observe(s));
 
-      // Navigation helpers
-      function goTo(index){
-        index = Math.max(0, Math.min(total - 1, index));
-        slides[index].scrollIntoView({behavior:'smooth', block:'start'});
-      }
-      function currentIndex(){
-        return slides.findIndex(s => s.getBoundingClientRect().top >= 0 && s.getBoundingClientRect().top < (window.innerHeight/2)) || 0;
-      }
-
-      // click nav
-      prevBtn.addEventListener('click', () => {
-        const ci = currentIndex();
-        goTo(ci - 1);
-      });
-      nextBtn.addEventListener('click', () => {
-        const ci = currentIndex();
-        goTo(ci + 1);
-      });
-
-      // top and start buttons
-      btnTop.addEventListener('click', ()=> goTo(0));
-      btnStart.addEventListener('click', ()=> goTo(0));
-
-      // wheel navigation: smooth but not aggressive
-      let wheelTimeout = null;
-      slidesEl.addEventListener('wheel', (e) => {
-        if(wheelTimeout) return;
-        wheelTimeout = setTimeout(()=> wheelTimeout = null, 300);
-        if(e.deltaY > 40) {
-          const ci = currentIndex();
-          goTo(ci + 1);
-        } else if(e.deltaY < -40) {
-          const ci = currentIndex();
-          goTo(ci - 1);
+      // get currently top-centered slide index
+      function currentIndex() {
+        const buffer = 10;
+        for (let i = 0; i < slides.length; i++) {
+          const r = slides[i].getBoundingClientRect();
+          if (r.top >= -buffer && r.top < window.innerHeight * 0.6) return i;
         }
-      }, {passive:true});
+        return 0;
+      }
 
-      // keyboard nav
+      // go to slide
+      function goTo(index) {
+        index = Math.max(0, Math.min(slides.length - 1, index));
+        slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      // nav handlers
+      prevBtn.addEventListener('click', () => goTo(currentIndex() - 1));
+      nextBtn.addEventListener('click', () => goTo(currentIndex() + 1));
+      btnTop.addEventListener('click', () => goTo(0));
+      btnStart.addEventListener('click', () => goTo(0));
+
+      // keyboard navigation
       document.addEventListener('keydown', (e) => {
-        if(e.key === 'ArrowDown' || e.key === 'PageDown') { const ci = currentIndex(); goTo(ci + 1); }
-        if(e.key === 'ArrowUp' || e.key === 'PageUp') { const ci = currentIndex(); goTo(ci - 1); }
-        if(e.key === 'Home') goTo(0);
-        if(e.key === 'End') goTo(total - 1);
+        if (e.key === 'ArrowDown' || e.key === 'PageDown') goTo(currentIndex() + 1);
+        if (e.key === 'ArrowUp' || e.key === 'PageUp') goTo(currentIndex() - 1);
+        if (e.key === 'Home') goTo(0);
+        if (e.key === 'End') goTo(slides.length - 1);
       });
 
-      // touch swipe
+      // wheel (debounced) navigation to simulate snap on scroll
+      let wheelLock = false;
+      slidesEl.addEventListener('wheel', (e) => {
+        if (wheelLock) return;
+        wheelLock = true;
+        setTimeout(() => wheelLock = false, 350); // 350ms debounce
+        if (e.deltaY > 30) goTo(currentIndex() + 1);
+        else if (e.deltaY < -30) goTo(currentIndex() - 1);
+      }, { passive: true });
+
+      // touch swipe for mobile
       let startY = 0, moved = false;
-      slidesEl.addEventListener('touchstart', (ev) => { startY = ev.touches[0].clientY; moved = false; }, {passive:true});
-      slidesEl.addEventListener('touchmove', (ev) => { const dy = ev.touches[0].clientY - startY; if(Math.abs(dy) > 30) moved = true; }, {passive:true});
+      slidesEl.addEventListener('touchstart', (ev) => { startY = ev.touches[0].clientY; moved = false; }, { passive: true });
+      slidesEl.addEventListener('touchmove', (ev) => { const dy = ev.touches[0].clientY - startY; if (Math.abs(dy) > 20) moved = true; }, { passive: true });
       slidesEl.addEventListener('touchend', (ev) => {
-        if(!moved) return;
-        const ci = currentIndex();
+        if (!moved) return;
         const endY = ev.changedTouches[0].clientY;
-        if(endY < startY) goTo(ci + 1); else goTo(ci - 1);
+        if (endY < startY) goTo(currentIndex() + 1); else goTo(currentIndex() - 1);
       });
 
-      // ensure initial image lazy load
-      lazyLoadIn(slides[0]);
+      // ensure initial slide lazy load
+      lazyLoad(slides[0]);
 
-      // expose helper for dev: get image prompts or slide count
+      // expose some helper info (dev)
       window.presentation = {
-        total,
-        getSlidesPrompts: () => Array.from(document.querySelectorAll('section.slide')).map(s => ({index: s.dataset.index, alt: s.querySelector('img')?.alt}))
+        total: slides.length,
+        goto: goTo,
+        getSlides: () => slides.map(s => ({index: s.dataset.index, alt: s.querySelector('img')?.alt}))
       };
-
     })();
   </script>
 </body>
