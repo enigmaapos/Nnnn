@@ -198,7 +198,7 @@
         </div>
 
         <div class="visual" aria-hidden="true">
-          <img data-src="http://googleusercontent.com/image_generation_content/1" alt="Futuristic holographic NFT scene (slide 1)">
+          <img src="http://googleusercontent.com/image_generation_content/1" alt="Futuristic holographic NFT scene (slide 1)">
           <div class="overlay"></div>
           <div class="caption">Slide 1 • Title</div>
         </div>
@@ -219,7 +219,7 @@
         </div>
 
         <div class="visual" aria-hidden="true">
-          <img data-src="http://googleusercontent.com/image_generation_content/7" alt="NFT explanation visual (slide 2)">
+          <img src="http://googleusercontent.com/image_generation_content/7" alt="NFT explanation visual (slide 2)">
           <div class="overlay"></div>
           <div class="caption">Slide 2 • Definition</div>
         </div>
@@ -240,7 +240,7 @@
         </div>
 
         <div class="visual" aria-hidden="true">
-          <img data-src="http://googleusercontent.com/image_generation_content/5" alt="Holographic certificate overlaying various digital media (slide 3)">
+          <img src="http://googleusercontent.com/image_generation_content/5" alt="Holographic certificate overlaying various digital media (slide 3)">
           <div class="overlay"></div>
           <div class="caption">Slide 3 • Relationship to Digital Assets</div>
         </div>
@@ -261,7 +261,7 @@
         </div>
 
         <div class="visual" aria-hidden="true">
-          <img data-src="http://googleusercontent.com/image_generation_content/4" alt="Futuristic marketplace UI with holographic NFT cards (slide 4)">
+          <img src="http://googleusercontent.com/image_generation_content/4" alt="Futuristic marketplace UI with holographic NFT cards (slide 4)">
           <div class="overlay"></div>
           <div class="caption">Slide 4 • Marketplaces</div>
         </div>
@@ -282,7 +282,7 @@
         </div>
 
         <div class="visual" aria-hidden="true">
-          <img data-src="http://googleusercontent.com/image_generation_content/6" alt="Grid of glowing holographic icons representing NFT earning methods (slide 5)">
+          <img src="http://googleusercontent.com/image_generation_content/6" alt="Grid of glowing holographic icons representing NFT earning methods (slide 5)">
           <div class="overlay"></div>
           <div class="caption">Slide 5 • Earning Methods</div>
         </div>
@@ -303,7 +303,7 @@
         </div>
 
         <div class="visual" aria-hidden="true">
-          <img data-src="http://googleusercontent.com/image_generation_content/2" alt="Warning shield and volatile chart (slide 6)">
+          <img src="http://googleusercontent.com/image_generation_content/2" alt="Warning shield and volatile chart (slide 6)">
           <div class="overlay"></div>
           <div class="caption">Slide 6 • Risks</div>
         </div>
@@ -324,7 +324,7 @@
         </div>
 
         <div class="visual" aria-hidden="true">
-          <img data-src="http://googleusercontent.com/image_generation_content/3" alt="Global holographic nodes (slide 7)">
+          <img src="http://googleusercontent.com/image_generation_content/3" alt="Global holographic nodes (slide 7)">
           <div class="overlay"></div>
           <div class="caption">Slide 7 • Closing</div>
         </div>
@@ -356,26 +356,6 @@
 
       let currentSlideIndex = 0;
       
-      // lazy-load helper
-      function lazyLoad(slide) {
-        const img = slide.querySelector('img[data-src]');
-        if (!img) return;
-        const src = img.dataset.src;
-        img.src = src;
-        img.removeAttribute('data-src');
-        // handle missing image gracefully
-        img.onerror = () => {
-          const wrapper = img.parentElement;
-          img.style.display = 'none';
-          if (!wrapper.querySelector('.placeholder')) {
-            const ph = document.createElement('div');
-            ph.className = 'placeholder';
-            ph.innerText = 'Image not found — please update the image URL.';
-            wrapper.appendChild(ph);
-          }
-        };
-      }
-
       // transition helper
       function updateSlide(index) {
         slides.forEach(slide => slide.classList.remove('active'));
@@ -411,8 +391,6 @@
         // update counter + progress
         currentEl.textContent = currentSlideIndex + 1;
         progress.style.width = ((currentSlideIndex + 1) / total) * 100 + '%';
-        
-        lazyLoad(slides[currentSlideIndex]);
       }
 
       // nav handlers
@@ -430,7 +408,7 @@
       });
       
       // initialize
-      lazyLoad(slides[0]);
+      updateSlide(0);
       revealContent(0);
 
     })();
