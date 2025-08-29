@@ -20,45 +20,32 @@
 
     /* base */
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:var(--bg);color:#e6f7ff;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial; -webkit-font-smoothing:antialiased; overflow: hidden;}
+    html,body{margin:0;background:var(--bg);color:#e6f7ff;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial; -webkit-font-smoothing:antialiased;}
     a{color:inherit}
 
     /* Outer container */
     .container{
       max-width:var(--max-width);
-      height:100vh;
       margin:0 auto;
-      display:flex;
       position:relative;
       border-radius:16px;
-      overflow:hidden;
       border:1px solid rgba(255,255,255,0.04);
       background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
       box-shadow: 0 20px 60px rgba(2,6,23,0.6);
+      padding: 22px;
     }
     
     @media (max-width: 1400px) {
         .container {
             border-radius: 0;
             margin: 0;
-        }
-    }
-    
-    @media (max-width: 600px) {
-        .container {
-            flex-direction: column;
-            border: none;
-            box-shadow: none;
-            height: 100%;
+            padding: 16px;
         }
     }
 
     /* Left sticky panel (presenter controls / notes) */
     .panel{
       display: none; /* This hides the entire left panel */
-    }
-    @media (max-width:1100px){
-      .panel{display:none}
     }
     .brand{display:flex;gap:12px;align-items:center}
     .logo{width:48px;height:48px;border-radius:10px;display:grid;place-items:center;font-weight:700;color:#041224;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
@@ -75,33 +62,21 @@
     .small{font-size:12px;color:var(--muted)}
     .slide-count{margin-top:auto;padding-top:10px;border-top:1px dashed rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)}
 
-    /* Slides area (no scroll) */
+    /* Slides area */
     .slides{
-      flex:1;
-      position:relative;
-      padding:22px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
     }
     
     /* Each slide */
     .slide{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap:28px;
       align-items:center;
       box-sizing:border-box;
       padding:48px;
-      opacity: 0;
-      transform: translateY(100%);
-      transition: transform 0.6s cubic-bezier(.2,.9,.3,1), opacity 0.6s ease;
-    }
-    .slide.active {
-      opacity: 1;
-      transform: translateY(0);
     }
     
     @media (max-width:1100px){
@@ -166,8 +141,7 @@
     .caption{position:absolute;left:18px;bottom:18px;background:rgba(0,0,0,0.35);padding:8px 12px;border-radius:8px;font-size:13px;color:#e2f8ff;border:1px solid rgba(255,255,255,0.03)}
 
     /* Progress bar top (sticky) */
-    .progress-top{position:absolute;left:0;right:0;top:0;height:6px;background:rgba(255,255,255,0.02);z-index:80}
-    .progress-top > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width 420ms cubic-bezier(.2,.9,.3,1)}
+    .progress-top{display: none;} /* This is no longer needed in this layout */
 
     /* Floating nav buttons */
     .nav-floating{position:fixed;right:20px;bottom:20px;display:flex;gap:10px;z-index:90}
@@ -195,8 +169,6 @@
 </head>
 <body>
   <div class="container" role="application" aria-label="NFT Presentation">
-    <div class="progress-top" aria-hidden="true"><i></i></div>
-
     <aside class="panel" aria-label="Presentation controls">
       <div class="brand">
         <div class="logo">NFT</div>
@@ -214,7 +186,7 @@
     </aside>
 
     <main class="slides" id="slides" role="region" aria-label="Slides" tabindex="0">
-      <section class="slide active" data-index="1" aria-label="Slide 1">
+      <section class="slide" data-index="1" aria-label="Slide 1">
         <div class="text">
           <h2 class="reveal">NFTs: The Future of Digital Ownership and Income</h2>
           <p class="lead reveal">Unlocking the value of digital assets through blockchain technology — verifiable ownership, programmable assets, and new income models for creators.</p>
@@ -374,12 +346,10 @@
 
   <script>
     (function () {
-      const slidesEl = document.getElementById('slides');
       const slides = Array.from(document.querySelectorAll('section.slide'));
       const total = slides.length;
       document.getElementById('total').textContent = total;
       const currentEl = document.getElementById('current');
-      const progress = document.querySelector('.progress-top > i');
       const prevBtn = document.getElementById('prev');
       const nextBtn = document.getElementById('next');
       const btnTop = document.getElementById('btn-top');
@@ -387,15 +357,10 @@
 
       let currentSlideIndex = 0;
       
-      // transition helper
-      function updateSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[index].classList.add('active');
-      }
-
-      // reveal content
-      function revealContent(index) {
+      // show content
+      function showContent(index) {
         const s = slides[index];
+        s.style.display = 'grid'; // Ensure the slide is visible
         const reveals = s.querySelectorAll('.reveal');
         reveals.forEach((el, i) => setTimeout(() => el.classList.add('visible'), 80 * i + 60));
         const img = s.querySelector('.visual img');
@@ -412,25 +377,30 @@
 
       // go to slide
       function goTo(index) {
-        if (index < 0 || index >= total || index === currentSlideIndex) return;
-
-        hideContent(currentSlideIndex);
-        currentSlideIndex = index;
-        updateSlide(currentSlideIndex);
-        revealContent(currentSlideIndex);
+        if (index < 0 || index >= total) return;
         
-        // update counter + progress
-        currentEl.textContent = currentSlideIndex + 1;
-        progress.style.width = ((currentSlideIndex + 1) / total) * 100 + '%';
-      }
+        // Hide content of the previous slide
+        hideContent(currentSlideIndex);
 
+        currentSlideIndex = index;
+        
+        // Scroll to the new slide
+        slides[currentSlideIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Show content of the new slide
+        showContent(currentSlideIndex);
+        
+        // update counter
+        currentEl.textContent = currentSlideIndex + 1;
+      }
+      
       // nav handlers
       prevBtn.addEventListener('click', () => goTo(currentSlideIndex - 1));
       nextBtn.addEventListener('click', () => goTo(currentSlideIndex + 1));
       btnTop.addEventListener('click', () => goTo(0));
       btnStart.addEventListener('click', () => goTo(0));
 
-      // keyboard navigation (retains the original up/down/home/end logic)
+      // keyboard navigation
       document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') goTo(currentSlideIndex + 1);
         if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') goTo(currentSlideIndex - 1);
@@ -439,8 +409,7 @@
       });
       
       // initialize
-      updateSlide(0);
-      revealContent(0);
+      showContent(0);
 
     })();
   </script>
