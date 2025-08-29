@@ -15,7 +15,7 @@
       --accent-2:#67a7ff;
       --glass: rgba(255,255,255,0.03);
       --card-radius:14px;
-      --max-width:1400px; /* Adjusted for wider screens */
+      --max-width:1400px;
     }
 
     /* base */
@@ -26,8 +26,8 @@
     /* Outer container */
     .container{
       max-width:var(--max-width);
-      height:100vh; /* Set to full viewport height */
-      margin:0 auto; /* Removed fixed margin */
+      height:100vh;
+      margin:0 auto;
       display:flex;
       position:relative;
       border-radius:16px;
@@ -40,6 +40,7 @@
     @media (max-width: 1400px) {
         .container {
             border-radius: 0;
+            margin: 0;
         }
     }
     
@@ -54,7 +55,7 @@
 
     /* Left sticky panel (presenter controls / notes) */
     .panel{
-      width: clamp(240px, 20vw, 360px); /* Dynamic width */
+      width: clamp(240px, 20vw, 360px);
       padding:22px;
       border-right:1px solid rgba(255,255,255,0.03);
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
@@ -96,7 +97,7 @@
       width: 100%;
       height: 100%;
       display:grid;
-      grid-template-columns: 1fr 1fr; /* Use fractional units */
+      grid-template-columns: 1fr 1fr;
       gap:28px;
       align-items:center;
       box-sizing:border-box;
@@ -123,10 +124,10 @@
     /* Text column */
     .text {
       color:#e9f6ff;
-      max-width:100%; /* Make text column fluid */
+      max-width:100%;
     }
-    .text h2{margin:0 0 8px;font-size:clamp(1.5rem, 4vw, 2.5rem)} /* Responsive font size */
-    .lead{color:var(--muted);margin:0 0 14px;font-size:clamp(0.8rem, 2vw, 1rem)} /* Responsive font size */
+    .text h2{margin:0 0 8px;font-size:clamp(1.5rem, 4vw, 2.5rem)}
+    .lead{color:var(--muted);margin:0 0 14px;font-size:clamp(0.8rem, 2vw, 1rem)}
     .bullets{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
     .bullets li{background:var(--glass);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
     .bullets li strong{color:var(--accent-2)}
